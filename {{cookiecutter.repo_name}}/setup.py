@@ -1,7 +1,5 @@
 import os
 from distutils.command.build import build
-
-from django.core import management
 from setuptools import setup, find_packages
 
 
@@ -14,7 +12,8 @@ except:
 
 class CustomBuild(build):
     def run(self):
-        management.call_command('compilemessages', verbosity=1, interactive=False)
+        from django.core import management
+        management.call_command('compilemessages', verbosity=1)
         build.run(self)
 
 
